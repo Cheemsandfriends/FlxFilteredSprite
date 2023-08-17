@@ -314,9 +314,13 @@ class FlxAnimateFilterRenderer
 		bmpRect.x = Math.abs(rect.x);
 		bmpRect.y = Math.abs(rect.y);
 
+		var bestResolution = renderer.__context3D.__backBufferWantsBestResolution;
+		renderer.__context3D.__backBufferWantsBestResolution = false;
 		renderer.__scissorRect(bmpRect);
 		renderer.__renderFilterPass(bmp, renderer.__defaultDisplayShader, true);
 		renderer.__scissorRect();
+
+		renderer.__context3D.__backBufferWantsBestResolution = bestResolution;
 
 		bmp.__renderTransform.identity();
 
